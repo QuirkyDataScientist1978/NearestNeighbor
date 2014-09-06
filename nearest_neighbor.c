@@ -22,7 +22,7 @@ int main(int argc, char **argv)
   points *p = (points*) malloc(NUMBER_OF_POINTS * sizeof(points));
   if (p == NULL ) { puts("Cannot Allocate points.");exit(1);}
 
-
+// Comment out printf's to get speed up.
  
 // Populate plane with points and write locations of points.
   FILE *locationsFile;
@@ -38,6 +38,9 @@ int main(int argc, char **argv)
 
 
 // Find nearest neighbor iand w
+  FILE *distancesFile;
+  if (NULL != (distancesFile = fopen ("distances.txt","w"))){
+
   for (int i = 0 ; i < NUMBER_OF_POINTS ; i++){
     double previous = 2;// Initial reference point out at 'infinity'.
     double distance = 0;// Initial reference point as close as self.
@@ -45,13 +48,15 @@ int main(int argc, char **argv)
       if ( j != i ){
 	distance = (p[i].x-p[j].x)*(p[i].x-p[j].x)
 	 	+  (p[i].y-p[j].y)*(p[i].y-p[j].y);
-
+	fprintf(distancesFile,"%f\n",distance);
         if ( distance < previous ){ 
            previous = distance;
            index_array[i] = j;
         }
       } 
     }
+  }
+    fclose(locationsFile);
   }
 
 
