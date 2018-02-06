@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 
 #ifndef NUMBER_OF_POINTS
-#define NUMBER_OF_POINTS 20000
+#define NUMBER_OF_POINTS 100
 #endif
 
 typedef struct { //struct to hold coordinates for each ordered-pair.
@@ -46,8 +47,8 @@ int main(int argc, char **argv)
     double distance = 0;// Initial reference point as close as self.
     for (int j = 0 ; j < NUMBER_OF_POINTS ; j++){
       if ( j != i ){
-	distance = (p[i].x-p[j].x)*(p[i].x-p[j].x)
-	 	+  (p[i].y-p[j].y)*(p[i].y-p[j].y);
+	distance = sqrt( (p[i].x-p[j].x)*(p[i].x-p[j].x)
+	 	+  (p[i].y-p[j].y)*(p[i].y-p[j].y) );
 	fprintf(distancesFile,"%f\n",distance);
         if ( distance < previous ){ 
            previous = distance;
