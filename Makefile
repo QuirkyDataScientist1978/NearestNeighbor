@@ -1,5 +1,5 @@
 gcc=CC
-CFLAGS=-O3 -Wall -g -std=c99 -lm
+CFLAGS=-O0 -Wall -g -std=c99 -lm
 #DFLAGS=-DNUMBER_OF_POINTS=50
 
 all:
